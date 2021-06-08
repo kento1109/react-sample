@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import styled from "styled-components";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
+import InputItem from '../inputItem';
+import {Item} from '../../../types'
+
 
 const StyledModal = Modal.styled`
   width: 20rem;
@@ -25,29 +28,11 @@ const ModalCcmponent = (props: Props) => {
         toggleModal
       } = props;
 
-    const [opacity, setOpacity] = useState(0);
-
-    // function toggleModal() {
-    //     setOpacity(0);
-    //     setIsOpen(!isOpen);
-    // }
-
-    // function afterOpen() {
-    //     setTimeout(() => {
-    //     setOpacity(1);
-    //     }, 100);
-    // }
-
-    function beforeClose() {
-        return new Promise((resolve) => {
-        setOpacity(0);    
-        setTimeout(resolve, 300);
-        });
-    }
+    const [stateItem, setItem] = useState<Item>({name:'', passed: false});
 
     return (
         <StyledModal isOpen={isOpen} onBackgroundClick={()=>(toggleModal())}>
-            <div>Model Open</div>
+            <InputItem stateItem={stateItem} setItem={setItem}/>
             <button onClick={()=>(toggleModal())}>Close me</button>
         </StyledModal>
     );
