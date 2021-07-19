@@ -33,17 +33,17 @@ const Control = styled.div`
 const items: Item[] = [
   {
     code: '123AB',
-    name: 'あああ',
+    name: 'ああああ',
     cost: '1200'
   },
   {
     code: '224OH',
-    name: 'いいい',
+    name: 'いいいい',
     cost: '900'
   },
   {
     code: '349LP',
-    name: 'ううう',
+    name: 'うううう',
     cost: '1800'
   }
 ];
@@ -102,14 +102,14 @@ const App = () => {
   const AddButtonDisabled = (code: string, name: string) => {
     setAddButtonDisabled(code == "" || name == "");
   }
-  
+
   const isAllItemFilled = (item: Item): boolean => {
-    return item.code != "" && item.name != "" && item.cost != "" ? true: false;
+    return item.code != "" && item.name != "" && item.cost != "" ? true : false;
   }
 
   return (
     <ModalProvider>
-      <Sidebar 
+      <Sidebar
         sidebar={<b>Sidebar content</b>}
         open={stateSidebar}
         styles={{ sidebar: { background: "white" } }}
@@ -123,15 +123,15 @@ const App = () => {
         <Control>
           <PrimaryButton onClick={() => (addItem(stateItem))} disabled={!isAllItemFilled(stateItem)}>
             追加
-        </PrimaryButton>
+          </PrimaryButton>
           <PrimaryButton onClick={deleteAll} disabled={true}>
             全件登録
-        </PrimaryButton>
+          </PrimaryButton>
         </Control>
         {/* <PrimaryButton onClick={() => addItem(stateInput)}> */}
         {/* アイテム追加 */}
         {/* </PrimaryButton> */}
-        <ItemList items={stateItems} onDelete={deleteItem} onEdit={selectItem}/>
+        <ItemList items={stateItems} onDelete={deleteItem} onEdit={selectItem} />
         <h5>{stateItems.length} 件</h5>
         {/* <ChartComponent></ChartComponent> */}
         <ModalComponent stateItem={stateMoldalItem} setItem={setModalItem} isOpen={(isOpen)} editItem={editItem} toggleModal={toggleModal} />
