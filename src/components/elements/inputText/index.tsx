@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`
-  height: 60px;
-  width: 450px;
+  height: 50px;
+  width: 100px;
   border: 1px solid #BEBEBE;
   box-sizing: border-box;
   border-radius: 6px;

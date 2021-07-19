@@ -1,4 +1,5 @@
 export type Item = {
+    code: string;
     name: string;
-    passed: boolean
+    cost: string
   }

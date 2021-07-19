@@ -7,8 +7,8 @@ import PrimaryButton from '../primaryButton';
 import {Item} from '../../../types'
 
 const InputText = styled.input`
-  height: 60px;
-  width: 450px;
+  height: 80px;
+  width: 30%;
   border: 1px solid #BEBEBE;
   box-sizing: border-box;
   border-radius: 6px;
@@ -31,6 +31,20 @@ const InputCheck = styled.input`
   color: #222222
 `;
 
+const Label = styled.label`
+    margin-top: 1cm;
+    margin-bottom: 0.5em;
+    font-weight: bolder;
+	color: palevioletred;
+    display: block;
+`;
+
+const Control = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  width: 100%;
+`;
 
 type Props = {
     stateItem: Item;
@@ -41,29 +55,52 @@ const InputItem=(props: Props)=>{
 
     const {stateItem, setItem} = props;
 
-    const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updateContent = (item: Item) => {
+        setItem(item);
+    };
+
+    const handleChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setItem({...stateItem, code: e.target.value});
+    };
+
+    const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setItem({...stateItem, name: e.target.value});
     };
-    const handleChangeChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setItem({...stateItem, passed: e.target.checked});
+
+    const handleChangeCost = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setItem({...stateItem, cost: e.target.value});
     };
 
     return (
         <>
-        <label>名前
+        <Label>商品を登録します</Label>
+        <Control>
         <InputText
+            id="itemCode"
+            type="text"
+            value={stateItem.code}
+            placeholder="商品コード"
+            onChange={handleChangeCode}
+        />
+        </Control>
+        <Control>
+        <InputText
+            id="itemName"
             type="text"
             value={stateItem.name}
-            onChange={handleChangeValue}
+            placeholder="商品名"
+            onChange={handleChangeName}
         />
-        </label>
-        <label>通過
-        <InputCheck
-            type="checkbox"
-            checked={stateItem.passed}
-            onChange={handleChangeChecked}
+        </Control>
+        <Control>
+        <InputText
+            id="itemCost"
+            type="number"
+            value={stateItem.cost}
+            placeholder="原価"
+            onChange={handleChangeCost}
         />
-        </label>
+        </Control>
         </>
     );
 }

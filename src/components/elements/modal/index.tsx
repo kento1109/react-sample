@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 import InputItem from '../inputItem';
+import PrimaryButton from '../primaryButton'
 import {Item} from '../../../types'
 
 
 const StyledModal = Modal.styled`
-  width: 20rem;
-  height: 20rem;
-  display: flex;
+  width: 50%;
+  height: 65%;
+  font-size: 24px;
+  text-align: center;
   align-items: center;
   justify-content: center;
   background-color: white;
@@ -18,24 +20,29 @@ const StyledModal = Modal.styled`
   transition : all 0.3s ease-in-out;`;
 
 type Props = {
+    stateItem: Item,
+    setItem: Dispatch<SetStateAction<Item>>
     isOpen: boolean,
+    editItem: () => void
     toggleModal: () => void,
 };
 
-const ModalCcmponent = (props: Props) => {
+const ModalComponent = (props: Props) => {
     const {
+        stateItem,
+        setItem,
         isOpen,
+        editItem,
         toggleModal
       } = props;
-
-    const [stateItem, setItem] = useState<Item>({name:'', passed: false});
 
     return (
         <StyledModal isOpen={isOpen} onBackgroundClick={()=>(toggleModal())}>
             <InputItem stateItem={stateItem} setItem={setItem}/>
-            <button onClick={()=>(toggleModal())}>Close me</button>
+            <PrimaryButton onClick={()=>((editItem(), toggleModal()))}>修正</PrimaryButton>
+            <PrimaryButton onClick={()=>(toggleModal())}>キャンセル</PrimaryButton>
         </StyledModal>
     );
     }
 
-export default ModalCcmponent;
+export default ModalComponent;
